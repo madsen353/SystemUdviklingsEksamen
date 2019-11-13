@@ -61,6 +61,8 @@ namespace APIDatabaseServer
                 foreach (ServerBasedSportsObject item in sportsObjectTodisplay)
                 {
                     Console.WriteLine(item.title);
+                    DAL dal = new DAL();
+                    dal.InsertActivityToDb(item);
                     //APITools.ShowSportsObject(item);
                 }
 
