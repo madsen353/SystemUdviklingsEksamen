@@ -108,6 +108,33 @@ namespace APIDatabaseServer
             }
             ResetDAL();
         }
+        public List<ServerBasedSportsObject> GetActivities()
+        {
+            //Foreach?
+            cmd.CommandText = "SELECT* FROM SportsActivity";
+            List<ServerBasedSportsObject> activities = new List<ServerBasedSportsObject>();
+            OpenConnection(con);
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    ServerBasedSportsObject s = new ServerBasedSportsObject();
+                    s.title = reader[0].ToString();
+                    s.text = reader[1].ToString();
+                    s.desc = reader[2].ToString();
+                    s.link = reader[3].ToString();
+                    s.image = reader[4].ToString();
+                    s.lat = reader[5].ToString();
+                    s.lon = reader[6].ToString();
+                    s.locationId = Int32.Parse(reader[7].ToString());
+                    s.tags = reader[8].ToString();
+                    activities.Add(s);
+                }
+            }
+
+            ResetDAL();
+            return activities;
+        }
 
     }
 }

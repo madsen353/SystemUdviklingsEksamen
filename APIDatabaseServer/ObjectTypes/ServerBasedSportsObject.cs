@@ -15,7 +15,6 @@ namespace APIDatabaseServer.ObjectTypes
         public string lat { get; set; }
         public string lon { get; set; }
         public int locationId { get; set; }
-
         //List 
         public string tags { get; set; }
 
