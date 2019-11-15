@@ -13,7 +13,6 @@ namespace APIDatabaseServer
     {
         private SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=SportsPortalen;" + "Integrated Security=true;");
         private SqlCommand cmd = new SqlCommand();
-
         public DAL()
         {
             cmd.Connection = con;
@@ -29,7 +28,6 @@ namespace APIDatabaseServer
         {
             con.Open();
         }
-
         public static void AddParam(SqlCommand cmd, object value, string name, SqlDbType sqlDbType)
         {
             //Made by Eby

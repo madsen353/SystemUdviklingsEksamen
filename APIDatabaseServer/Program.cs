@@ -31,31 +31,55 @@ namespace APIDatabaseServer
                     webBuilder.UseStartup<Startup>();
                 });
 
-
+        static List<string> GetAllCategories()
+        {
+            List<string> allCategories = new List<string>();
+            allCategories.Add("outdoor");
+            allCategories.Add("sportsboth");
+            allCategories.Add("sportcompetition");
+            allCategories.Add("ball");
+            allCategories.Add("team");
+            allCategories.Add("teamboth");
+            allCategories.Add("indoor");
+            allCategories.Add("gym");
+            allCategories.Add("fitness");
+            allCategories.Add("single");
+            allCategories.Add("typeother");
+            allCategories.Add("water");
+            allCategories.Add("cycling");
+            allCategories.Add("sportnature");
+            allCategories.Add("sportboth sportcompetition");
+            allCategories.Add("ride");
+            allCategories.Add("running");
+            return allCategories;
+        }
         static async Task GetDataFromSkivePortalen()
         {
             client.BaseAddress = new Uri("https://www.flyttilskive.dk/umbraco/surface/Search/GetActivity");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
-            //Foreach
-            try
+            List<string> categories = GetAllCategories();
+            foreach (string category in categories)
             {
-                RequestBody requestBody = new RequestBody("natur", "ball");
-                List<ServerBasedSportsObject> sportsObjectTodisplay = await APITools.GetSportsObjectAsync("https://www.flyttilskive.dk/umbraco/surface/Search/GetActivity", client, requestBody);
-                foreach (ServerBasedSportsObject item in sportsObjectTodisplay)
+                try
                 {
-                    Console.WriteLine(item.title);
-                    DAL dal = new DAL();
-                    dal.InsertActivityToDb(item);
+                    RequestBody requestBody = new RequestBody("natur", category);
+                    List<ServerBasedSportsObject> sportsObjectTodisplay = await APITools.GetSportsObjectAsync("https://www.flyttilskive.dk/umbraco/surface/Search/GetActivity", client, requestBody);
+                    foreach (ServerBasedSportsObject item in sportsObjectTodisplay)
+                    {
+                        Console.WriteLine(item.title);
+                        DAL dal = new DAL();
+                        dal.InsertActivityToDb(item);
+                    }
+                    Console.ReadLine();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
                 }
                 Console.ReadLine();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            Console.ReadLine();
+            }        
         }
     }
 }
