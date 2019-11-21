@@ -21,7 +21,7 @@ namespace Webserver.Models
     
         public static async Task<List<ServerBasedSportsObject>> GetDataFromSkivePortalen(string url= "https://localhost:44396/sportsactivity")
         {
-            client.BaseAddress = new Uri(url);
+            //client.BaseAddress = new Uri(url);
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));

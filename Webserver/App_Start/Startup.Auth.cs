@@ -58,11 +58,11 @@ namespace Webserver
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "611221930022-d8abhh5obs02kkt0gg5qqpdqdrin10ur.apps.googleusercontent.com",
+                ClientSecret = "ZpVkT58_UI9ij4kwe1R8Y8p6"
+            });
         }
     }
 }

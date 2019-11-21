@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Webserver.Controllers
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
         public IEnumerable<ServerBasedSportsObject> sportsActivities { get; private set; }
