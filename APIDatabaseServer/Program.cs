@@ -72,13 +72,10 @@ namespace APIDatabaseServer
                         DAL dal = new DAL();
                         dal.InsertActivityToDb(item);
                     }
-                    Console.ReadLine();
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.Message);
                 }
-                Console.ReadLine();
             }        
         }
     }

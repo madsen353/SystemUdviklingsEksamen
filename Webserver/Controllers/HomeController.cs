@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Webserver.ObjectTypes;
+using Webserver.Models;
+using System.Threading.Tasks;
 
 namespace Webserver.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public IEnumerable<ServerBasedSportsObject> sportsActivities { get; private set; }
+        public async Task<ActionResult> Index()
         {
+            sportsActivities = await DataFetcher.GetDataFromSkivePortalen();
+            ViewBag.visualSportsActivities = sportsActivities;
             return View();
         }
 

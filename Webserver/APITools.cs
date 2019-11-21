@@ -18,7 +18,7 @@ namespace Webserver
             Console.WriteLine($"Name: {sportsObjectToDisplay.title}");
         }
 
-        public static async Task<List<ServerBasedSportsObject>> GetSportsObjectAsync(string path, HttpClient client)
+        public static async Task<List<ServerBasedSportsObject>> GetSportsObject(string path, HttpClient client)
         {
             var request = new HttpRequestMessage
             {
@@ -26,11 +26,11 @@ namespace Webserver
                 RequestUri = new Uri(path),
             };
             List<ServerBasedSportsObject> objectsToDownload = null;
-            HttpResponseMessage response = await client.SendAsync(request);
+            //HttpResponseMessage response = await client.SendAsync(request);
+            HttpResponseMessage response =  await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
-                //var jsonString = await response.Content.
-                var jsonString = await response.Content.ReadAsStringAsync();
+                string jsonString = await response.Content.ReadAsStringAsync();
                 //jsonString.Wait();
                 objectsToDownload = JsonConvert.DeserializeObject<List<ServerBasedSportsObject>>(jsonString);
                 // objectsToDownload = await response.Content.ReadAsAsync<ServerBasedSportsObject>();               
